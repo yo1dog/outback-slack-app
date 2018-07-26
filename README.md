@@ -2,6 +2,7 @@
 
 [Slack](https://slack.com) app that delivers random words from the infamous [Outback blacklist](https://www.reddit.com/r/webdev/comments/91mi29/the_source_over_at_outback_steakhouse_is_mighty/). How vulgar!
 
+[![Add to Slack](https://platform.slack-edge.com/img/add_to_slack.png)](https://slack.com/oauth/authorize?client_id=404565662049.404406837920&scope=commands)</a>
 
 ## Infrastructure
 
