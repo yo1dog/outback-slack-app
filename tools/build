@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+set -o pipefail
+cd "$(dirname ${BASH_SOURCE[0]})"
+cd ..
+
+ZIP_FILENAME="outback-slack-bot.zip"
+
+# zip the app
+rm -f "./$ZIP_FILENAME"
+zip -r --quiet "./$ZIP_FILENAME" ./app
