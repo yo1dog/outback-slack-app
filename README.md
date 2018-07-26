@@ -1,6 +1,6 @@
-# outback-slack-bot
+# outback-slack-app
 
-[Slack](https://slack.com) bot that responds with random words from the infamous [Outback blacklist](https://www.reddit.com/r/webdev/comments/91mi29/the_source_over_at_outback_steakhouse_is_mighty/). How vulgar!
+[Slack](https://slack.com) app that delivers random words from the infamous [Outback blacklist](https://www.reddit.com/r/webdev/comments/91mi29/the_source_over_at_outback_steakhouse_is_mighty/). How vulgar!
 
 
 ## Infrastructure
