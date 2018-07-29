@@ -8,7 +8,7 @@ module.exports = function handleSlashCommand(event, context, slackParams, slashC
   if (inputText === 'help') {
     res = {
       text: 'https://www.reddit.com/r/webdev/comments/91mi29/the_source_over_at_outback_steakhouse_is_mighty/',
-      response_type: 'in_channel',
+      response_type: 'in_channel'
     };
   }
   else {
@@ -25,20 +25,24 @@ module.exports = function handleSlashCommand(event, context, slackParams, slashC
     let numSentences = 1;
     match = /\bx?(\d+)\b/i.exec(inputText);
     if (match) {
-      numSentences = parseInt(match[1], 10);
+      numSentences = Math.max(parseInt(match[1], 10), 1);
     }
     
     // create setences
     const sentenceStrs = [];
     for (let i = 0; i < numSentences; ++i) {
-      const sentenceStr = createVulgarSentence(userMentionStrs);
+      let sentenceStr = createVulgarSentence(userMentionStrs);
+      if (numSentences > 1) {
+        sentenceStr = `• ${sentenceStr}`;
+      }
+      
       sentenceStrs.push(sentenceStr);
     }
     
     res = {
       text: sentenceStrs.join('\n'),
       response_type: 'in_channel',
-      mrkdwn: false
+      mrkdwn: true
     };
   }
   
