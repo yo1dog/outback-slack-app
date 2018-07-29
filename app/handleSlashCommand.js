@@ -1,4 +1,4 @@
-const outbackBlacklist = require('./outbackBlacklist.json');
+const createVulgarSentence = require('./createVulgarSentence');
 
 
 module.exports = function handleSlashCommand(event, context, slackParams, slashCommand, cb) {
@@ -12,17 +12,31 @@ module.exports = function handleSlashCommand(event, context, slackParams, slashC
     };
   }
   else {
-    // choose a random naughty word from the blacklist
-    const naughtyWord = outbackBlacklist[
-      Math.floor(Math.random() * outbackBlacklist.length)
-    ];
+    // get the mentioned users
+    const regex = /<@(U[A-Z0-9]+)[|>]/gi;
+    let match;
+    let userMentionStrs = [];
+    while ((match = regex.exec(inputText))) {
+      const slackUserId = match[1];
+      userMentionStrs.push(`<@${slackUserId}>`);
+    }
     
-    // check if someone was mentioned
-    const match = /<@(U[a-zA-Z0-9]+)[|>]/.exec(inputText);
-    const slackUserId = match && match[1];
+    // check if there is a multiplier
+    let numSentences = 1;
+    match = /\bx?(\d+)\b/i.exec(inputText);
+    if (match) {
+      numSentences = parseInt(match[1], 10);
+    }
+    
+    // create setences
+    const sentenceStrs = [];
+    for (let i = 0; i < numSentences; ++i) {
+      const sentenceStr = createVulgarSentence(userMentionStrs);
+      sentenceStrs.push(sentenceStr);
+    }
     
     res = {
-      text: slackUserId? `<@${slackUserId}> is a ${naughtyWord}` : naughtyWord,
+      text: sentenceStrs.join('\n'),
       response_type: 'in_channel',
       mrkdwn: false
     };
