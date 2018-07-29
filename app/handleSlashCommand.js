@@ -25,7 +25,7 @@ module.exports = function handleSlashCommand(event, context, slackParams, slashC
     let numSentences = 1;
     match = /\bx?(\d+)\b/i.exec(inputText);
     if (match) {
-      numSentences = Math.max(parseInt(match[1], 10), 1);
+      numSentences = Math.min(Math.max(parseInt(match[1], 10), 1), 100);
     }
     
     // create setences
